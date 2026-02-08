@@ -1,6 +1,16 @@
-def main():
-    print("Hello from fastapi-alembic!")
+from fastapi import FastAPI
+from app.core.settings import settings
+from scalar_fastapi import get_scalar_api_reference
+
+app = FastAPI(
+    title = settings.APP_NAME,
+    version = settings.VERSION,
+)
 
 
-if __name__ == "__main__":
-    main()
+@app.get("/scalar")
+def get_scalar():
+    return get_scalar_api_reference(
+        openapi_url= app.openapi_url,
+        title= app.title
+    )
