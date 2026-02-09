@@ -1,3 +1,4 @@
+from app.routers.auth import auth_router
 from app.routers.roasteries import roastery_router
 from sys import prefix
 from app.routers.recipes import recipe_router
@@ -12,7 +13,7 @@ app = FastAPI(
     version = settings.VERSION,
 )
 
-
+app.include_router(router=auth_router, prefix="/api")
 app.include_router(router=recipe_router, prefix="/api")
 app.include_router(router=roastery_router, prefix="/api")
 
