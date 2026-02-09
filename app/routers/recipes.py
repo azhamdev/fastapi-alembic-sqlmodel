@@ -1,7 +1,7 @@
 from app.models.database import Recipe
 from sqlmodel import select
 from app.models.engine import get_db
-from app.schema.recipes import RecipeRequest, RecipeResponse
+from app.schema.recipes import RecipeRequest
 from fastapi import APIRouter, Depends, status, HTTPException
 from app.utils.query_params import standard_params
 
@@ -17,7 +17,7 @@ def get_recipes(params=Depends(dependency=standard_params), db=Depends(dependenc
     recipes = result.all()
 
 
-    return recipes
+    return {"total": len(recipes), "data": recipes}
 
 
 @recipe_router.post("/", status_code=status.HTTP_201_CREATED)

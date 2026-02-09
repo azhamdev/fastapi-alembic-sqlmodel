@@ -15,6 +15,6 @@ class Recipe(SQLModel, table=True):
 
 class Roastery(SQLModel, table=True):
     id: uuid.UUID = Field(primary_key=True, default_factory=uuid.uuid4)
-    name: str
+    name: str = Field(default="Unnamed Roastery")
     location: str | None = None
-    established_year: int | None = None
+    established_year: str | None = None
